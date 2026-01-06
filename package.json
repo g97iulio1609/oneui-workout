@@ -1,0 +1,42 @@
+{
+  "name": "@onecoach/ui-workout",
+  "version": "0.0.0",
+  "type": "module",
+  "description": "Workout-specific UI components for OneCoach",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./src/index.ts"
+    },
+    "./builder": {
+      "types": "./src/builder/index.ts",
+      "default": "./src/builder/index.ts"
+    },
+    "./live": {
+      "types": "./src/live/index.ts",
+      "default": "./src/live/index.ts"
+    }
+  },
+  "scripts": {
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@onecoach/lib-design-system": "workspace:*",
+    "@onecoach/schemas": "workspace:*",
+    "@onecoach/types": "workspace:*",
+    "@onecoach/ui": "workspace:*"
+  },
+  "peerDependencies": {
+    "framer-motion": ">=11.0.0",
+    "lucide-react": ">=0.400.0",
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.10",
+    "typescript": "^5.9.3"
+  },
+  "sideEffects": false
+}
