@@ -8,7 +8,7 @@
  * - LiveCircuitCard: Circuit with round progress
  */
 
-export { LiveWarmupCard } from './live-warmup-card';
-export { LiveCardioCard } from './live-cardio-card';
-export { LiveSupersetCard } from './live-superset-card';
-export { LiveCircuitCard } from './live-circuit-card';
+export { LiveWarmupCard, type LiveWarmupCardProps } from './live-warmup-card';
+export { LiveCardioCard, type LiveCardioCardProps } from './live-cardio-card';
+export { LiveSupersetCard, type LiveSupersetCardProps } from './live-superset-card';
+export { LiveCircuitCard, type LiveCircuitCardProps } from './live-circuit-card';

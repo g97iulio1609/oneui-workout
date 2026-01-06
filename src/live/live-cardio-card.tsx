@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { Play, Pause, CheckCircle2, Timer, Gauge, MapPin, Heart } from 'lucide-react';
-import type { CardioExercise } from '@onecoach/schemas/workout';
+import type { CardioExercise } from '@onecoach/schemas';
 import { Card } from '@onecoach/ui';
 
 export interface LiveCardioCardProps {
@@ -107,7 +107,7 @@ export function LiveCardioCard({ cardio, onComplete, className = '' }: LiveCardi
               <h2 className="text-lg font-bold text-neutral-900 dark:text-white">{cardio.name}</h2>
               <p className="text-sm text-neutral-500 dark:text-neutral-400">
                 {machineLabels[cardio.machine]} •{' '}
-                <span className={intensity.color}>{intensity.label}</span>
+                <span className={intensity?.color}>{intensity?.label}</span>
               </p>
             </div>
           </div>

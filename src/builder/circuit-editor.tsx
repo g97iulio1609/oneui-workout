@@ -5,7 +5,7 @@ import { Card, Button, Input, Badge } from '@onecoach/ui';
 import { Plus, Trash2, Clock, RefreshCw, GripVertical } from 'lucide-react';
 import { cn } from '@onecoach/lib-design-system';
 import { motion, AnimatePresence } from 'framer-motion';
-import type { Circuit, CircuitExerciseItem } from '@onecoach/schemas/workout';
+import type { Circuit, CircuitExerciseItem } from '@onecoach/schemas';
 
 // ============================================================================
 // Types for Builder
@@ -30,10 +30,10 @@ export function CircuitEditor({
 }: CircuitEditorProps) {
   const [exercises, setExercises] = useState<CircuitExerciseItem[]>(
     circuit?.exercises ?? [
-      { name: 'Burpees', reps: 10 },
-      { name: 'Kettlebell Swing', reps: 15 },
-      { name: 'Mountain Climbers', duration: 30 },
-      { name: 'Plank', duration: 45 },
+      { exerciseId: 'burpees', name: 'Burpees', reps: 10 },
+      { exerciseId: 'kb_swing', name: 'Kettlebell Swing', reps: 15 },
+      { exerciseId: 'mtn_climbers', name: 'Mountain Climbers', duration: 30 },
+      { exerciseId: 'plank', name: 'Plank', duration: 45 },
     ]
   );
   const [rounds, setRounds] = useState(circuit?.rounds ?? 3);
@@ -55,7 +55,7 @@ export function CircuitEditor({
   };
 
   const handleAddExercise = () => {
-    const updated = [...exercises, { name: '', reps: 10 }];
+    const updated = [...exercises, { exerciseId: `ex_${Date.now()}`, name: '', reps: 10 }];
     setExercises(updated);
     emitChange({ exercises: updated });
   };

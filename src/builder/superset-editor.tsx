@@ -1,32 +1,80 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Card, Button, Input, Badge } from '@onecoach/ui';
 import { Plus, Trash2, Clock, Link2, GripVertical } from 'lucide-react';
 import { cn } from '@onecoach/lib-design-system';
 import { motion, AnimatePresence } from 'framer-motion';
-import type { Superset } from '@onecoach/schemas/workout';
+import type { Superset, Exercise, ExerciseSet } from '@onecoach/schemas';
 
 // ============================================================================
-// Types for Builder (simplified exercise for creation)
+// Types & Converters
 // ============================================================================
 
 /** Simplified exercise for superset builder UI */
-interface SupersetBuilderExercise {
-  name: string;
-  exerciseId?: string;
+interface SupersetBuilderExercise extends Omit<Exercise, 'setGroups' | 'reps'> {
+  // Builder-specific fields
   sets: number;
   reps: number;
-  notes?: string;
+  // Kept for compatibility but managed internally
+  setGroups: Exercise['setGroups'];
 }
 
-/** Props for the editor - uses builder-friendly types */
+/** Props for the editor */
 interface SupersetEditorProps {
-  superset?: Partial<Superset> & { exercises?: SupersetBuilderExercise[] };
-  onChange: (superset: Partial<Superset> & { exercises: SupersetBuilderExercise[] }) => void;
+  superset?: Superset;
+  onChange: (superset: Superset) => void;
   onRemove?: () => void;
   className?: string;
 }
+
+const DEFAULT_EXERCISE_DATA = {
+  description: '',
+  type: 'isolation' as const,
+  category: 'strength' as const,
+  setGroups: [],
+};
+
+// Converter: Schema Exercise -> UI Builder Exercise
+const toBuilder = (ex: Exercise): SupersetBuilderExercise => {
+  const group = ex.setGroups?.[0];
+  return {
+    ...ex,
+    sets: group?.count ?? 3,
+    // Safely handle reps string/number mismatch if relevant, or verify schema
+    // Exercise schema says reps is string (optional display)
+    // But sets have reps as number. We use the SET reps.
+    reps: group?.baseSet.reps ?? 12, 
+    setGroups: ex.setGroups ?? []
+  };
+};
+
+// Converter: UI Builder Exercise -> Schema Exercise
+const fromBuilder = (b: SupersetBuilderExercise): Exercise => {
+  // Create a proper SetGroup
+  const setGroup = {
+    id: b.setGroups?.[0]?.id ?? `sg_${Date.now()}_${Math.random()}`,
+    count: b.sets,
+    baseSet: {
+      reps: b.reps, // number
+      rest: 60,
+      weight: null,
+      weightLbs: null,
+      intensityPercent: null,
+      rpe: null,
+      ...b.setGroups?.[0]?.baseSet
+    } as ExerciseSet,
+    sets: []
+  };
+  
+  // Remove sets/reps from top level as they aren't in Exercise schema (except display reps string)
+  const { sets, reps, ...rest } = b;
+  
+  return {
+    ...rest,
+    setGroups: [setGroup]
+  };
+};
 
 // ============================================================================
 // SupersetEditor Component
@@ -39,32 +87,44 @@ export function SupersetEditor({
   className 
 }: SupersetEditorProps) {
   const [exercises, setExercises] = useState<SupersetBuilderExercise[]>(
-    superset?.exercises ?? [
-      { name: 'Curl con Bilanciere', sets: 3, reps: 12 },
-      { name: 'French Press', sets: 3, reps: 12 },
+    superset?.exercises?.map(toBuilder) ?? [
+      { exerciseId: 'curl', name: 'Curl con Bilanciere', sets: 3, reps: 12, ...DEFAULT_EXERCISE_DATA },
+      { exerciseId: 'french', name: 'French Press', sets: 3, reps: 12, ...DEFAULT_EXERCISE_DATA },
     ]
   );
+  
   const [restBetween, setRestBetween] = useState(superset?.restBetweenExercises ?? 0);
   const [restAfter, setRestAfter] = useState(superset?.restAfterSuperset ?? 90);
   const [rounds, setRounds] = useState(superset?.rounds ?? 1);
   const [name, setName] = useState(superset?.name ?? 'Superset');
 
-  const emitChange = (updates?: Partial<Superset> & { exercises?: SupersetBuilderExercise[] }) => {
+  const emitChange = (updates?: { exercises?: SupersetBuilderExercise[], name?: string, restBetweenExercises?: number, restAfterSuperset?: number, rounds?: number }) => {
+    // Current state values
+    const currentName = updates?.name ?? name;
+    const currentRestBetween = updates?.restBetweenExercises ?? restBetween;
+    const currentRestAfter = updates?.restAfterSuperset ?? restAfter;
+    const currentRounds = updates?.rounds ?? rounds;
+    const currentExercises = updates?.exercises ?? exercises;
+
     onChange({
       id: superset?.id ?? `superset_${Date.now()}`,
       type: 'superset',
-      name,
-      exercises,
-      restBetweenExercises: restBetween,
-      restAfterSuperset: restAfter,
-      rounds,
-      ...updates,
+      name: currentName,
+      exercises: currentExercises.map(fromBuilder),
+      restBetweenExercises: currentRestBetween,
+      restAfterSuperset: currentRestAfter,
+      rounds: currentRounds,
     });
   };
 
+  // Update parent when scalar values change
+  useEffect(() => {
+    emitChange({});
+  }, [restBetween, restAfter, rounds]);
+
   const handleAddExercise = () => {
     if (exercises.length >= 4) return;
-    const updated = [...exercises, { name: '', sets: 3, reps: 10 }];
+    const updated = [...exercises, { exerciseId: `ex_${Date.now()}`, name: '', sets: 3, reps: 10, ...DEFAULT_EXERCISE_DATA }];
     setExercises(updated);
     emitChange({ exercises: updated });
   };
@@ -79,7 +139,7 @@ export function SupersetEditor({
   const handleExerciseChange = (
     index: number, 
     field: keyof SupersetBuilderExercise, 
-    value: string | number
+    value: any
   ) => {
     const updated = exercises.map((ex, i) => 
       i === index ? { ...ex, [field]: value } : ex
