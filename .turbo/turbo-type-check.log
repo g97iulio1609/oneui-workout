@@ -49,9 +49,9 @@
     [7m   [0m [96m  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
     'exerciseId' is declared here.
 
-[96msrc/builder/superset-editor.tsx[0m:[93m57[0m:[93m7[0m - [91merror[0m[90m TS2322: [0mType 'SupersetBuilderExercise[]' is not assignable to type '{ exerciseId: string; name: string; description: string; type: "compound" | "accessory" | "isolation" | "core"; category: "core" | "strength" | "cardio" | "flexibility" | "balance" | "endurance"; ... 13 more ...; videoUrl?: string | undefined; }[] & SupersetBuilderExercise[]'.
-  Type 'SupersetBuilderExercise[]' is not assignable to type '{ exerciseId: string; name: string; description: string; type: "compound" | "accessory" | "isolation" | "core"; category: "core" | "strength" | "cardio" | "flexibility" | "balance" | "endurance"; ... 13 more ...; videoUrl?: string | undefined; }[]'.
-    Type 'SupersetBuilderExercise' is missing the following properties from type '{ exerciseId: string; name: string; description: string; type: "compound" | "accessory" | "isolation" | "core"; category: "core" | "strength" | "cardio" | "flexibility" | "balance" | "endurance"; ... 13 more ...; videoUrl?: string | undefined; }': description, type, category, setGroups
+[96msrc/builder/superset-editor.tsx[0m:[93m57[0m:[93m7[0m - [91merror[0m[90m TS2322: [0mType 'SupersetBuilderExercise[]' is not assignable to type '{ exerciseId: string; name: string; description: string; type: "isolation" | "compound" | "accessory" | "core"; category: "core" | "strength" | "cardio" | "flexibility" | "balance" | "endurance"; ... 13 more ...; videoUrl?: string | undefined; }[] & SupersetBuilderExercise[]'.
+  Type 'SupersetBuilderExercise[]' is not assignable to type '{ exerciseId: string; name: string; description: string; type: "isolation" | "compound" | "accessory" | "core"; category: "core" | "strength" | "cardio" | "flexibility" | "balance" | "endurance"; ... 13 more ...; videoUrl?: string | undefined; }[]'.
+    Type 'SupersetBuilderExercise' is missing the following properties from type '{ exerciseId: string; name: string; description: string; type: "isolation" | "compound" | "accessory" | "core"; category: "core" | "strength" | "cardio" | "flexibility" | "balance" | "endurance"; ... 13 more ...; videoUrl?: string | undefined; }': description, type, category, setGroups
 
 [7m57[0m       exercises,
 [7m  [0m [91m      ~~~~~~~~~[0m
@@ -59,25 +59,25 @@
   [96m../../../onecoach-schemas/src/workout/base.schemas.ts[0m:[93m299[0m:[93m3[0m
     [7m299[0m   exercises: z.array(exerciseSchema).min(2).max(4),
     [7m   [0m [96m  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
-    The expected type comes from property 'exercises' which is declared here on type 'Partial<{ id: string; type: "superset"; exercises: { exerciseId: string; name: string; description: string; type: "compound" | "accessory" | "isolation" | "core"; category: "core" | "strength" | "cardio" | "flexibility" | "balance" | "endurance"; ... 13 more ...; videoUrl?: string | undefined; }[]; ... 4 more ...; n...'
+    The expected type comes from property 'exercises' which is declared here on type 'Partial<{ id: string; type: "superset"; exercises: { exerciseId: string; name: string; description: string; type: "isolation" | "compound" | "accessory" | "core"; category: "core" | "strength" | "cardio" | "flexibility" | "balance" | "endurance"; ... 13 more ...; videoUrl?: string | undefined; }[]; ... 4 more ...; n...'
 
-[96msrc/builder/superset-editor.tsx[0m:[93m69[0m:[93m18[0m - [91merror[0m[90m TS2322: [0mType 'SupersetBuilderExercise[]' is not assignable to type '{ exerciseId: string; name: string; description: string; type: "compound" | "accessory" | "isolation" | "core"; category: "core" | "strength" | "cardio" | "flexibility" | "balance" | "endurance"; ... 13 more ...; videoUrl?: string | undefined; }[] & SupersetBuilderExercise[]'.
-  Type 'SupersetBuilderExercise[]' is not assignable to type '{ exerciseId: string; name: string; description: string; type: "compound" | "accessory" | "isolation" | "core"; category: "core" | "strength" | "cardio" | "flexibility" | "balance" | "endurance"; ... 13 more ...; videoUrl?: string | undefined; }[]'.
-    Type 'SupersetBuilderExercise' is missing the following properties from type '{ exerciseId: string; name: string; description: string; type: "compound" | "accessory" | "isolation" | "core"; category: "core" | "strength" | "cardio" | "flexibility" | "balance" | "endurance"; ... 13 more ...; videoUrl?: string | undefined; }': description, type, category, setGroups
+[96msrc/builder/superset-editor.tsx[0m:[93m69[0m:[93m18[0m - [91merror[0m[90m TS2322: [0mType 'SupersetBuilderExercise[]' is not assignable to type '{ exerciseId: string; name: string; description: string; type: "isolation" | "compound" | "accessory" | "core"; category: "core" | "strength" | "cardio" | "flexibility" | "balance" | "endurance"; ... 13 more ...; videoUrl?: string | undefined; }[] & SupersetBuilderExercise[]'.
+  Type 'SupersetBuilderExercise[]' is not assignable to type '{ exerciseId: string; name: string; description: string; type: "isolation" | "compound" | "accessory" | "core"; category: "core" | "strength" | "cardio" | "flexibility" | "balance" | "endurance"; ... 13 more ...; videoUrl?: string | undefined; }[]'.
+    Type 'SupersetBuilderExercise' is missing the following properties from type '{ exerciseId: string; name: string; description: string; type: "isolation" | "compound" | "accessory" | "core"; category: "core" | "strength" | "cardio" | "flexibility" | "balance" | "endurance"; ... 13 more ...; videoUrl?: string | undefined; }': description, type, category, setGroups
 
 [7m69[0m     emitChange({ exercises: updated });
 [7m  [0m [91m                 ~~~~~~~~~[0m
 
-[96msrc/builder/superset-editor.tsx[0m:[93m76[0m:[93m18[0m - [91merror[0m[90m TS2322: [0mType 'SupersetBuilderExercise[]' is not assignable to type '{ exerciseId: string; name: string; description: string; type: "compound" | "accessory" | "isolation" | "core"; category: "core" | "strength" | "cardio" | "flexibility" | "balance" | "endurance"; ... 13 more ...; videoUrl?: string | undefined; }[] & SupersetBuilderExercise[]'.
-  Type 'SupersetBuilderExercise[]' is not assignable to type '{ exerciseId: string; name: string; description: string; type: "compound" | "accessory" | "isolation" | "core"; category: "core" | "strength" | "cardio" | "flexibility" | "balance" | "endurance"; ... 13 more ...; videoUrl?: string | undefined; }[]'.
-    Type 'SupersetBuilderExercise' is missing the following properties from type '{ exerciseId: string; name: string; description: string; type: "compound" | "accessory" | "isolation" | "core"; category: "core" | "strength" | "cardio" | "flexibility" | "balance" | "endurance"; ... 13 more ...; videoUrl?: string | undefined; }': description, type, category, setGroups
+[96msrc/builder/superset-editor.tsx[0m:[93m76[0m:[93m18[0m - [91merror[0m[90m TS2322: [0mType 'SupersetBuilderExercise[]' is not assignable to type '{ exerciseId: string; name: string; description: string; type: "isolation" | "compound" | "accessory" | "core"; category: "core" | "strength" | "cardio" | "flexibility" | "balance" | "endurance"; ... 13 more ...; videoUrl?: string | undefined; }[] & SupersetBuilderExercise[]'.
+  Type 'SupersetBuilderExercise[]' is not assignable to type '{ exerciseId: string; name: string; description: string; type: "isolation" | "compound" | "accessory" | "core"; category: "core" | "strength" | "cardio" | "flexibility" | "balance" | "endurance"; ... 13 more ...; videoUrl?: string | undefined; }[]'.
+    Type 'SupersetBuilderExercise' is missing the following properties from type '{ exerciseId: string; name: string; description: string; type: "isolation" | "compound" | "accessory" | "core"; category: "core" | "strength" | "cardio" | "flexibility" | "balance" | "endurance"; ... 13 more ...; videoUrl?: string | undefined; }': description, type, category, setGroups
 
 [7m76[0m     emitChange({ exercises: updated });
 [7m  [0m [91m                 ~~~~~~~~~[0m
 
-[96msrc/builder/superset-editor.tsx[0m:[93m88[0m:[93m18[0m - [91merror[0m[90m TS2322: [0mType 'SupersetBuilderExercise[]' is not assignable to type '{ exerciseId: string; name: string; description: string; type: "compound" | "accessory" | "isolation" | "core"; category: "core" | "strength" | "cardio" | "flexibility" | "balance" | "endurance"; ... 13 more ...; videoUrl?: string | undefined; }[] & SupersetBuilderExercise[]'.
-  Type 'SupersetBuilderExercise[]' is not assignable to type '{ exerciseId: string; name: string; description: string; type: "compound" | "accessory" | "isolation" | "core"; category: "core" | "strength" | "cardio" | "flexibility" | "balance" | "endurance"; ... 13 more ...; videoUrl?: string | undefined; }[]'.
-    Type 'SupersetBuilderExercise' is missing the following properties from type '{ exerciseId: string; name: string; description: string; type: "compound" | "accessory" | "isolation" | "core"; category: "core" | "strength" | "cardio" | "flexibility" | "balance" | "endurance"; ... 13 more ...; videoUrl?: string | undefined; }': description, type, category, setGroups
+[96msrc/builder/superset-editor.tsx[0m:[93m88[0m:[93m18[0m - [91merror[0m[90m TS2322: [0mType 'SupersetBuilderExercise[]' is not assignable to type '{ exerciseId: string; name: string; description: string; type: "isolation" | "compound" | "accessory" | "core"; category: "core" | "strength" | "cardio" | "flexibility" | "balance" | "endurance"; ... 13 more ...; videoUrl?: string | undefined; }[] & SupersetBuilderExercise[]'.
+  Type 'SupersetBuilderExercise[]' is not assignable to type '{ exerciseId: string; name: string; description: string; type: "isolation" | "compound" | "accessory" | "core"; category: "core" | "strength" | "cardio" | "flexibility" | "balance" | "endurance"; ... 13 more ...; videoUrl?: string | undefined; }[]'.
+    Type 'SupersetBuilderExercise' is missing the following properties from type '{ exerciseId: string; name: string; description: string; type: "isolation" | "compound" | "accessory" | "core"; category: "core" | "strength" | "cardio" | "flexibility" | "balance" | "endurance"; ... 13 more ...; videoUrl?: string | undefined; }': description, type, category, setGroups
 
 [7m88[0m     emitChange({ exercises: updated });
 [7m  [0m [91m                 ~~~~~~~~~[0m
@@ -99,4 +99,4 @@ Errors  Files
      3  src/builder/circuit-editor.tsx[90m:32[0m
      4  src/builder/superset-editor.tsx[90m:57[0m
      2  src/live/live-cardio-card.tsx[90m:110[0m
-[41m[30m ELIFECYCLE [39m[49m [31mCommand failed with exit code 1.[39m
+[41m[30m ELIFECYCLE [39m[49m [31mCommand failed with exit code 2.[39m
