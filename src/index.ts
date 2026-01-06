@@ -2,15 +2,39 @@
  * @onecoach/ui-workout
  *
  * Workout-specific UI components for OneCoach.
- * Part of the onecoach-ui monorepo.
+ * Provides visual editors for workout programs and live session tracking.
  *
- * Exports:
- * - builder: Visual editors for workout program elements
- * - live: Components for live workout tracking sessions
+ * @packageDocumentation
  */
 
-// Builder components
-export * from './builder';
+// =============================================================================
+// Builder Components - Visual editors for workout program elements
+// =============================================================================
+export {
+  WarmupEditor,
+  SupersetEditor,
+  CircuitEditor,
+  CardioEditor,
+  ElementTypeSelector,
+} from './builder';
 
-// Live session components
-export * from './live';
+// Re-export types from builder
+export type { WorkoutElementType } from '@onecoach/schemas/workout';
+
+// =============================================================================
+// Live Session Components - Real-time workout tracking UI
+// =============================================================================
+export {
+  LiveWarmupCard,
+  LiveCardioCard,
+  LiveSupersetCard,
+  LiveCircuitCard,
+} from './live';
+
+// Re-export props types for consumers
+export type {
+  LiveWarmupCardProps,
+  LiveCardioCardProps,
+  LiveSupersetCardProps,
+  LiveCircuitCardProps,
+} from './live';
